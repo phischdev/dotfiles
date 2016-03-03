@@ -1,0 +1,19 @@
+#!/bin/bash
+
+BATTINFO=`acpi -b`
+DISC=`echo $BATTINFO | grep Discharging`
+CUT=`echo $BATTINFO | cut -f 4 -d " " | tr -d [:punct:]`
+
+if [ "$DISC" = "" ]; then
+  echo "Charging"
+else
+  if [ $CUT -lt 8 ]; then
+    echo "hibernate"
+    #sudo pm-hibernate
+    mylock.sh &
+    sudo pm-suspend
+    #sudo pm-hibernate
+  elif [ $CUT -lt 20 ]; then
+    DISPLAY=:0.0 /usr/bin/notify-send "low battery" "$BATTINFO" -u critical -t 60000
+  fi
+fi 
