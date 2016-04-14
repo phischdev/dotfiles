@@ -211,8 +211,8 @@ exec --no-startup-id telegram
 exec --no-startup-id xpad
 exec --no-startup-id thunderbird
 exec --no-startup-id firefox
-exec --no-startup-id sudo gtk-redshift
-exec --no-startup-id mystartup.sh
+exec --no-startup-id redshift-gtk
+exec --no-startup-id "mystartup.sh"
 
 # Lock
 bindsym $mod+$alt+Pause exec "mylock.sh & sudo pm-suspend"
