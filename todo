@@ -1,0 +1,8 @@
+install Telegram into /opt/
+
+cd /opt/
+wget -O telegram.tar.xz https://telegram.org/dl/desktop/linux
+tar xf telegram.tar.xz
+rm telegram.tar.xz
+ln -s /opt/Telegram/Telegram /usr/local/bin
+
