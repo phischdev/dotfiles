@@ -16,6 +16,7 @@ ln -s /opt/Telegram/Telegram /usr/local/bin
 #add scripts
 ln -s ~/dotfiles/mystartup.sh /usr/local/bin/
 ln -s ~/dotfiles/mylock.sh /usr/local/bin/
+ln -s ~/dotfiles/i3 ~/.config/i3
 
 
 #install phisch keyboard layout
