@@ -1,9 +1,29 @@
-install Telegram into /opt/
+#!/bin/bash
+
+#copy repo
+cd ~
+git clone https://github.com/phischdev/dotfiles.git 
+
+
+#install Telegram into /opt/
 
 cd /opt/
 wget -O telegram.tar.xz https://telegram.org/dl/desktop/linux
-tar xf telegram.tar.xz
+tar -xf telegram.tar.xz
 rm telegram.tar.xz
 ln -s /opt/Telegram/Telegram /usr/local/bin
 
-install phisch keyboard layout
+#add scripts
+ln -s ~/dotfiles/mystartup.sh /usr/local/bin/
+ln -s ~/dotfiles/mylock.sh /usr/local/bin/
+
+
+#install phisch keyboard layout
+cd /usr/share/X11/xkb/symbols
+wget https://raw.githubusercontent.com/phischdev/phisch-keyboard-layout/master/Ubuntu/phisch-de
+cd /usr/share/X11/xkb/rules/
+
+CONTENT="<layout>\n  <configItem>\n    <name>phisch-de</name>\n    <shortDescription>Ph</shortDescription>\n    <description>German (phisch)</description>\n    <languageList>\n      <iso639Id>ger</iso639Id>\n    </languageList>\n  </configItem>\n  <variantList/>\n</layout>"
+C=$(echo $CONTENT | sed 's/\//\\\//g')
+sed -i "/<\/layoutList>/ s/.*/${C}\n&/" evdev.xml
+dpkg-reconfigure xkb-data	
