@@ -33,3 +33,7 @@ rm telegram.tar.xz
 ln -s /opt/Telegram/Telegram /usr/local/bin
 
 
+#install firefox, thunderbird, import thunderbird config
+
+#sound: pavucontrols
+#xbacklight (xorg-backlight) -> set /etc/X11/..conf.. to the right backgrounddriver (/sys/../backlight)
