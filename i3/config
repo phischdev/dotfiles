@@ -231,7 +231,7 @@ hide_edge_borders both
 #new_window pixel
 
 assign [class="xpad"] 2:telegram
-assign [class="telegram"] 2:telegram
+assign [class="Telegram"] 2:telegram
 assign [class="Thunderbird"] 1:mail
 for_window [class="telegram"] floating enable
 for_window [class="xpad"] floating enable
