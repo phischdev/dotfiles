@@ -215,8 +215,8 @@ exec --no-startup-id redshift-gtk
 exec --no-startup-id "mystartup.sh"
 
 # Lock
-bindsym $mod+$alt+Pause exec "mylock.sh & sudo pm-suspend"
-bindsym $mod+Pause exec "mylock.sh"
+bindsym $mod+$alt+End exec "mylock.sh & systemctl suspend"
+bindsym $mod+End exec "mylock.sh"
 exec xautolock -time 10 -notify 30 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" -locker "/usr/bin/mylock.sh' &"
 
 # Monitors
@@ -224,16 +224,16 @@ bindsym $mod+Shift+Up move container to output HDMI1
 bindsym $mod+Shift+Down move container to output eDP1
 bindsym $mod+$alt+Up move workspace to output HDMI1
 bindsym $mod+$alt+Down move workspace to output eDP1
-bindsym $mod+p exec "xrandr --output HDMI1 --auto --above eDP1"
+bindsym XF86Display exec "xrandr --output HDMI1 --auto --above eDP1"
 
 # Windows
 hide_edge_borders both
 #new_window pixel
 
 assign [class="xpad"] 2:telegram
-assign [class="Telegram"] 2:telegram
+assign [class="elegram"] 2:telegram
 assign [class="Thunderbird"] 1:mail
-for_window [class="telegram"] floating enable
+for_window [class="elegram"] floating enable
 for_window [class="xpad"] floating enable
 
 bindsym $mod+period move scratchpad
