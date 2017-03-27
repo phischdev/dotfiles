@@ -95,10 +95,14 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+q focus child
 
+
+set $ws_config "0:config ?"
+set $ws_mail  "1:mail ?"
+set $ws_telegram "2:telegram ?"
 # switch to workspace
-bindsym $mod+asciicircum workspace 0:config
-bindsym $mod+1 workspace 1:mail
-bindsym $mod+2 workspace 2:telegram
+bindsym $mod+asciicircum workspace $ws_config
+bindsym $mod+1 workspace $ws_mail
+bindsym $mod+2 workspace $ws_telegram
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
@@ -215,9 +219,9 @@ exec --no-startup-id redshift-gtk
 exec --no-startup-id "mystartup.sh"
 
 # Lock
-bindsym $mod+$alt+End exec "mylock.sh & systemctl suspend"
+bindsym $mod+$alt+End exec "mylock.sh && systemctl suspend"
 bindsym $mod+End exec "mylock.sh"
-exec xautolock -time 10 -notify 30 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" -locker "/usr/bin/mylock.sh' &"
+exec xautolock -time 10 -notify 30 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" -locker "/usr/bin/mylock.sh"
 
 # Monitors
 bindsym $mod+Shift+Up move container to output HDMI1
@@ -229,6 +233,10 @@ bindsym XF86Display exec "xrandr --output HDMI1 --auto --above eDP1"
 # Windows
 hide_edge_borders both
 #new_window pixel
+
+# Stuff
+workspace_auto_back_and_forth yes
+
 
 assign [class="xpad"] 2:telegram
 assign [class="elegram"] 2:telegram
