@@ -55,6 +55,7 @@ fi
 # exec xterm -geometry 80x66+0+0 -name login
 
 xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
+xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
 xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Drag Enabled" 1
 xinput set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 1
 

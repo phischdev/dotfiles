@@ -119,9 +119,9 @@ bindsym $mod+KP_Multiply workspace 15
 bindsym $mod+KP_Subtract workspace 16
 
 # move focused container to workspace
-bindsym $mod+Shift+asciicircum move container to workspace 0:config
-bindsym $mod+Shift+1 move container to workspace 1:mail
-bindsym $mod+Shift+2 move container to workspace 2:telegram
+bindsym $mod+Shift+asciicircum move container to workspace $ws_config
+bindsym $mod+Shift+1 move container to workspace $ws_mail
+bindsym $mod+Shift+2 move container to workspace $ws_telegram
 bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
@@ -208,6 +208,8 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightnes
 
 # Kill windows with alt+F4
 bindsym $alt+F4 kill
+bindsym $mod+i exec --no-startup-id phischstop -m -s
+bindsym $mod+shift+i exec --no-startup-id phischstop -m -c
 
 # Startup
 exec --no-startup-id nm-applet
@@ -216,12 +218,32 @@ exec --no-startup-id xpad
 exec --no-startup-id thunderbird
 exec --no-startup-id firefox
 exec --no-startup-id redshift-gtk
-exec --no-startup-id "mystartup.sh"
+exec --no-startup-id mystartup.sh
 
 # Lock
 bindsym $mod+$alt+End exec "mylock.sh && systemctl suspend"
-bindsym $mod+End exec "mylock.sh"
+#bindsym $mod+End exec "mylock.sh"
 exec xautolock -time 10 -notify 30 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" -locker "/usr/bin/mylock.sh"
+
+
+set $Locker "mylock.sh"
+
+set $mode_system (O.o)
+mode "$mode_system" {
+    bindsym Insert exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym End exec --no-startup-id "$Locker && systemctl suspend", mode "default"
+    bindsym Home exec --no-startup-id "$Locker && systemctl hibernate", mode "default"
+    bindsym Delete exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+End mode "$mode_system"
+
 
 # Monitors
 bindsym $mod+Shift+Up move container to output HDMI1
@@ -235,12 +257,12 @@ hide_edge_borders both
 #new_window pixel
 
 # Stuff
-workspace_auto_back_and_forth yes
+#workspace_auto_back_and_forth yes
 
 
-assign [class="xpad"] 2:telegram
-assign [class="elegram"] 2:telegram
-assign [class="Thunderbird"] 1:mail
+assign [class="xpad"] $ws_telegram
+assign [class="elegram"] $ws_telegram
+assign [class="Thunderbird"] $ws_mail
 for_window [class="elegram"] floating enable
 for_window [class="xpad"] floating enable
 
@@ -249,3 +271,10 @@ bindsym $mod+comma scratchpad show
 
 bindsym --whole-window $mod+button4 workspace next
 bindsym --whole-window $mod+button5 workspace prev
+
+# i3-gaps
+gaps inner 20
+gaps outer 10
+
+# Style
+exec_always feh --bg-scale ~/dotfiles/wallpaper/design-wallpaper-22.jpg 
