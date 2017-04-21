@@ -10,4 +10,5 @@ PS1='[\u@\h \W]\$ '
 
 
 alias wifi='sudo wifi-menu'
-alias wieth='sudo wifi-menu && sudo openconnect sslvpn.ethz.ch'
+alias wieth='wifi && vpneth'
+alias vpneth='sudo openconnect sslvpn.ethz.ch'

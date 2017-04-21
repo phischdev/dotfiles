@@ -231,12 +231,14 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+# bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+# bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec sudo mybright up 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec sudo mybright down 5 # increase screen brightness
 
 # Kill windows with alt+F4
 bindsym $alt+F4 kill
-bindsym $mod+i exec --no-startup-id phischstop -m -s
+bindsym $mod+i exec --no-startup-id "/home/philipp/dotfiles/scripts/phischstop.sh -m -s"
 bindsym $mod+shift+i exec --no-startup-id phischstop -m -c
 
 # Startup
@@ -247,6 +249,8 @@ exec --no-startup-id thunderbird
 exec --no-startup-id firefox
 exec --no-startup-id redshift-gtk
 exec --no-startup-id mystartup.sh
+exec --no-startup-id franz
+
 
 # Lock
 bindsym $mod+$alt+End exec "mylock.sh && systemctl suspend"
@@ -256,29 +260,24 @@ exec xautolock -time 10 -notify 30 -notifier "notify-send -u critical -t 10000 -
 
 set $Locker "mylock.sh"
 
-set $mode_system (O.o)
-mode "$mode_system" {
-    bindsym Insert exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym End exec --no-startup-id "$Locker && systemctl suspend", mode "default"
-    bindsym Home exec --no-startup-id "$Locker && systemctl hibernate", mode "default"
-    bindsym Delete exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+bindsym $mod+Home exec --no-startup-id $Locker, mode "default"
+#bindsym $mod+e exec --no-startup-id i3-msg exit, mode "default"
+bindsym $mod+End exec --no-startup-id "$Locker && systemctl suspend"
+bindsym $mod+Insert exec --no-startup-id "$Locker && systemctl hibernate"
+bindsym $mod+Delete exec --no-startup-id systemctl reboot
+#bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
 
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-bindsym $mod+End mode "$mode_system"
 
 
 # Monitors
-bindsym $mod+Shift+Up move container to output HDMI1
-bindsym $mod+Shift+Down move container to output eDP1
-bindsym $mod+$alt+Up move workspace to output HDMI1
-bindsym $mod+$alt+Down move workspace to output eDP1
-bindsym XF86Display exec "xrandr --output HDMI1 --auto --above eDP1"
+set $screen="eDP-1"
+set $HDMI="HDMI-2"
+
+bindsym $mod+Shift+Up move container to output $HDMI
+bindsym $mod+Shift+Down move container to output $screen
+bindsym $mod+$alt+Up move workspace to output $HDMI
+bindsym $mod+$alt+Down move workspace to output $screen
+bindsym XF86Display exec xrandr --output $HDMI --auto --above $screen
 
 # Windows
 hide_edge_borders both
@@ -290,8 +289,9 @@ hide_edge_borders both
 
 assign [class="xpad"] $ws_telegram
 assign [class="elegram"] $ws_telegram
+assign [class="anz"] $ws_telegram
 assign [class="Thunderbird"] $ws_mail
-for_window [class="elegram"] floating enable
+# for_window [class="elegram"] floating enable
 for_window [class="xpad"] floating enable
 
 bindsym $mod+period move scratchpad
