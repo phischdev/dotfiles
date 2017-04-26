@@ -12,3 +12,4 @@ PS1='[\u@\h \W]\$ '
 alias wifi='sudo wifi-menu'
 alias wieth='wifi && vpneth'
 alias vpneth='sudo openconnect sslvpn.ethz.ch'
+export PATH="/home/philipp/bin/Sencha/Cmd:$PATH"
