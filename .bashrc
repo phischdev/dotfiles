@@ -12,4 +12,6 @@ PS1='[\u@\h \W]\$ '
 alias wifi='sudo wifi-menu'
 alias wieth='wifi && vpneth'
 alias vpneth='sudo openconnect sslvpn.ethz.ch'
+alias service='sudo systemctl'
+alias xbacklight='sudo /usr/local/bin/xbacklight'
 export PATH="/home/philipp/bin/Sencha/Cmd:$PATH"
