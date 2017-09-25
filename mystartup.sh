@@ -12,7 +12,9 @@ synclient HorizTwoFingerScroll=1
 synclient PalmDetect=1
 
 # Sound
-pactl set-sink-mute 1 true
+pactl set-sink-mute 0 true
 
 # Applications
 #sudo gtk-redshift
+cd /home/philipp/Documents/Humanisten/pdhBox/rambox/
+npm start &

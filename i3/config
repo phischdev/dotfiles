@@ -40,6 +40,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
+bindsym $mod+slash kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -207,13 +208,8 @@ client.focused_inactive $inactive-bg-color $inactive-bg-color  $inactive-text-co
 client.urgent		$urgent-bg-color   $urgent-bg-color    $text-color	    #00ff00
 
 # Rename Workspaces
-bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
-
-
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
 bar {
         status_command i3status
         tray_output primary
@@ -238,8 +234,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 # Sreen brightness controls
 # bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 # bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # increase screen brightness
+bindsym XF86MonBrightnessUp exec sudo mybright up 5 # increase screen brightness
 
 # Kill windows with alt+F4
 bindsym $alt+F4 kill
@@ -253,9 +248,8 @@ exec --no-startup-id xpad
 exec --no-startup-id thunderbird
 exec --no-startup-id firefox
 exec --no-startup-id redshift-gtk
-exec --no-startup-id mystartup.sh
-exec --no-startup-id franz
-
+exec --no-startup-id mystartup.sh 
+exec --no-startup-id "thunar --daemon"
 
 # Lock
 bindsym $mod+$alt+End exec "mylock.sh && systemctl suspend"
@@ -265,19 +259,27 @@ exec xautolock -time 10 -notify 30 -notifier "notify-send -u critical -t 10000 -
 
 set $Locker "mylock.sh"
 
-bindsym $mod+Home exec --no-startup-id $Locker, mode "default"
-#bindsym $mod+e exec --no-startup-id i3-msg exit, mode "default"
-bindsym $mod+End exec --no-startup-id "$Locker && systemctl suspend"
-bindsym $mod+Insert exec --no-startup-id "$Locker && systemctl hibernate"
-bindsym $mod+Delete exec --no-startup-id systemctl reboot
-#bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+set $mode_system (O.o)
+mode "$mode_system" {
+    bindsym Insert exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym End exec --no-startup-id "$Locker && systemctl suspend", mode "default"
+    bindsym Home exec --no-startup-id "$Locker && systemctl hibernate", mode "default"
+    bindsym Delete exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+End mode "$mode_system"
 
 
-
-# Monitors
 set $screen="eDP-1"
 set $HDMI="HDMI-2"
 
+# Monitors
 bindsym $mod+Shift+Up move container to output $HDMI
 bindsym $mod+Shift+Down move container to output $screen
 bindsym $mod+$alt+Up move workspace to output $HDMI

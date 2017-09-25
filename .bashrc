@@ -15,3 +15,7 @@ alias vpneth='sudo openconnect sslvpn.ethz.ch'
 alias service='sudo systemctl'
 alias xbacklight='sudo /usr/local/bin/xbacklight'
 export PATH="/home/philipp/bin/Sencha/Cmd:$PATH"
+alias lss='ls -haltr'
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
