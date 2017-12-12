@@ -16,5 +16,5 @@ pactl set-sink-mute 0 true
 
 # Applications
 #sudo gtk-redshift
-cd /home/philipp/Documents/Humanisten/pdhBox/rambox/
-npm start &
+# cd /home/philipp/Documents/Humanisten/pdhBox/rambox/
+# npm start &
