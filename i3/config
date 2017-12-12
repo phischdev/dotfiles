@@ -38,10 +38,6 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
-# kill focused window
-bindsym $mod+Shift+q kill
-bindsym $mod+slash kill
-
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -238,18 +234,22 @@ bindsym XF86MonBrightnessUp exec sudo mybright up 5 # increase screen brightness
 
 # Kill windows with alt+F4
 bindsym $alt+F4 kill
-bindsym $mod+i exec --no-startup-id "/home/philipp/dotfiles/scripts/phischstop.sh -m -s"
-bindsym $mod+shift+i exec --no-startup-id phischstop -m -c
+bindsym $mod+i exec "/home/philipp/dotfiles/scripts/phischstop.sh -m -s"
+bindsym $mod+shift+i exec phischstop -m -c
+
+bindsym $mod+Shift+q kill
+bindsym $mod+shift+slash kill
 
 # Startup
 exec --no-startup-id nm-applet
-exec --no-startup-id telegram
+exec --no-startup-id telegram-desktop
 exec --no-startup-id xpad
 exec --no-startup-id thunderbird
 exec --no-startup-id firefox
 exec --no-startup-id redshift-gtk
 exec --no-startup-id mystartup.sh 
 exec --no-startup-id "thunar --daemon"
+exec --no-startup-id humanistenbox
 
 # Lock
 bindsym $mod+$alt+End exec "mylock.sh && systemctl suspend"
@@ -280,11 +280,11 @@ set $screen="eDP-1"
 set $HDMI="HDMI-2"
 
 # Monitors
-bindsym $mod+Shift+Up move container to output $HDMI
-bindsym $mod+Shift+Down move container to output $screen
-bindsym $mod+$alt+Up move workspace to output $HDMI
-bindsym $mod+$alt+Down move workspace to output $screen
-bindsym XF86Display exec xrandr --output $HDMI --auto --above $screen
+bindsym XF86Dispplay+Up move container to output $HDMI
+bindsym XF86Display+Down move container to output $screen
+bindsym XF86Display+shift+Up move workspace to output $HDMI
+bindsym XF86Display+shift+Down move workspace to output $screen
+bindsym XF86Display exec "xrandr --output $HDMI --auto --above $screen"
 
 # Windows
 hide_edge_borders both
@@ -293,7 +293,7 @@ hide_edge_borders both
 # Stuff
 #workspace_auto_back_and_forth yes
 
-
+assign [title="HumanistenBox"] $ws_telegram 
 assign [class="xpad"] $ws_telegram
 assign [class="elegram"] $ws_telegram
 assign [class="anz"] $ws_telegram
