@@ -293,7 +293,7 @@ hide_edge_borders both
 # Stuff
 #workspace_auto_back_and_forth yes
 
-assign [title="HumanistenBox"] $ws_telegram 
+assign [title="umanistenBox"] $ws_telegram 
 assign [class="xpad"] $ws_telegram
 assign [class="elegram"] $ws_telegram
 assign [class="anz"] $ws_telegram
