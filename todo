@@ -4,6 +4,13 @@
 cd ~
 git clone https://github.com/phischdev/dotfiles.git 
 
+# sudo rights required
+if [[ $UID != 0 ]]; then
+    echo "Please run this script with sudo:"
+    echo "sudo $0 $*"
+    exit 1
+fi
+
 #add scripts
 ln -s ~/dotfiles/mystartup.sh /usr/local/bin/
 ln -s ~/dotfiles/mylock.sh /usr/local/bin/
