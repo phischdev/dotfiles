@@ -254,7 +254,7 @@ exec --no-startup-id humanistenbox
 # Lock
 bindsym $mod+$alt+End exec "mylock.sh && systemctl suspend"
 #bindsym $mod+End exec "mylock.sh"
-exec xautolock -time 10 -notify 30 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" -locker "/usr/bin/mylock.sh"
+exec xautolock -time 10 -notify 30 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" -locker "/usr/local/bin/mylock.sh"
 
 
 set $Locker "mylock.sh"
@@ -263,7 +263,7 @@ set $mode_system (O.o)
 mode "$mode_system" {
     bindsym Insert exec --no-startup-id $Locker, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym End exec --no-startup-id "$Locker && systemctl suspend", mode "default"
+    bindsym End exec --no-startup-id "systemctl suspend", mode "default"
     bindsym Home exec --no-startup-id "$Locker && systemctl hibernate", mode "default"
     bindsym Delete exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  

@@ -1,0 +1,13 @@
+[Unit]
+Description=Lock the screen on resume from suspend
+Before=sleep.target
+
+[Service]
+User=philipp
+Environment=DISPLAY=:0
+ExecStart=/usr/local/bin/mylock.sh
+Type=forking
+
+[Install]
+WantedBy=sleep.target
+
