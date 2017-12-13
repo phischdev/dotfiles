@@ -8,6 +8,9 @@ git clone https://github.com/phischdev/dotfiles.git
 ln -s ~/dotfiles/mystartup.sh /usr/local/bin/
 ln -s ~/dotfiles/mylock.sh /usr/local/bin/
 ln -s ~/dotfiles/i3 ~/.config/i3
+ln -s ~/dotfiles/lock.service /etc/systemd/system
+
+systemctl enable lock.service
 
 #install phisch keyboard layout
 cd /usr/share/X11/xkb/symbols
@@ -26,11 +29,11 @@ mystartup.sh
 apt-get install scrot
 
 #install Telegram into /opt/
-cd /opt/
-wget -O telegram.tar.xz https://telegram.org/dl/desktop/linux
-tar -xf telegram.tar.xz
-rm telegram.tar.xz
-ln -s /opt/Telegram/Telegram /usr/local/bin
+#cd /opt/
+#wget -O telegram.tar.xz https://telegram.org/dl/desktop/linux
+#tar -xf telegram.tar.xz
+#rm telegram.tar.xz
+#ln -s /opt/Telegram/Telegram /usr/local/bin
 
 
 #install firefox, thunderbird, import thunderbird config
