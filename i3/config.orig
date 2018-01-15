@@ -13,6 +13,24 @@ set $mod Mod4
 set $alt Mod1
 set $ctrl Mod3
 
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+
+# font pango:monospace 8
+font pango:System San Francisco Display 13
+
+
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -25,7 +43,7 @@ bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+shift+d exec --no-startup-id i3-dmenu-desktop
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+j focus left
@@ -35,10 +53,10 @@ bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
-# bindsym $mod+Left focus left
-# bindsym $mod+Down focus down
-# bindsym $mod+Up focus up
-# bindsym $mod+Right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+j move left
@@ -78,21 +96,11 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+q focus child
 
-# == Workspaces ==
-# /home/philipp/dotfiles/i3/workspaces.conf
-# Scrub through workspaces
-bindsym --whole-window $mod+button4 workspace next
-bindsym --whole-window $mod+button5 workspace prev
-
-
-# Rename Workspaces
-bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: ' 
 
 set $ws_config 0 config
 set $ws_mail 1 mail
 set $ws_chat 2 chat
 set $ws_music 12 music
-
 # switch to workspace
 bindsym $mod+asciicircum workspace number $ws_config
 bindsym $mod+1 workspace number $ws_mail 
@@ -130,9 +138,6 @@ bindsym $mod+Shift+BackSpace   move container to workspace number 13
 #bindsym $mod+Shift+KP_Divide   move container to workspace number 14
 #bindsym $mod+Shift+KP_Multiply move container to workspace number 15
 #bindsym $mod+Shift+KP_Subtract move container to workspace number 16
-
-
-
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -185,44 +190,26 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# == Style ==
-# /home/philipp/dotfiles/i3/style.conf
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
 
-# font pango:monospace 8
-font pango:System San Francisco Display 13
-
-# Background
-exec_always feh --bg-scale ~/dotfiles/wallpaper/design-wallpaper-22.jpg 
-
-# i3-gaps
-gaps inner 20
-gaps outer 10
-# smart_gaps on
-
-# Color constants
-#set $bg-color 		 #2f343f
-set $bg-color		 #2f343f
-set $active-border-color #2f343f
+set $bg-color 	         #2f343f
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
-set $urgent-bg-color	 #E53935
+set $urgent-bg-color #E53935
 
 # window colors
-#                       border             	 background          text                 indicator
-client.focused          $active-border-color     $active-border-color $text-color          #00ff00
-client.unfocused        $inactive-bg-color	 $inactive-bg-color  $inactive-text-color #00ff00
-client.focused_inactive $inactive-bg-color	 $inactive-bg-color  $inactive-text-color #00ff00
-client.urgent		$urgent-bg-color  	 $urgent-bg-color    $text-color	  #00ff00
+#                       border              background         text                 indicator
+client.focused          $bg-color          $bg-color           $text-color          #00ff00
+client.unfocused        $inactive-bg-color $inactive-bg-color  $inactive-text-color #00ff00
+client.focused_inactive $inactive-bg-color $inactive-bg-color  $inactive-text-color #00ff00
+client.urgent		$urgent-bg-color   $urgent-bg-color    $text-color	    #00ff00
+
+# Rename Workspaces
+bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: ' 
 
 
-# == Bar ==
-# /home/philipp/dotfiles/i3/bar.conf
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-
 bar {
         status_command i3status
         tray_output primary
@@ -238,10 +225,7 @@ bar {
 	}
 }
 
-
 ############################## p h i s c h ############################
-# == Media ==
-# /home/philipp/dotfiles/i3/media.conf
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
@@ -251,6 +235,25 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 # bindsym XF86MonBrightnessUp exec sudo mybright up 5 # increase screen brightness
+
+# Kill windows with alt+F4
+bindsym $alt+F4 kill
+bindsym $mod+i exec "/home/philipp/dotfiles/scripts/phischstop.sh -m -s"
+bindsym $mod+shift+i exec phischstop -m -c
+
+bindsym $mod+Shift+q kill
+bindsym $mod+shift+slash kill
+
+# Startup
+exec --no-startup-id nm-applet
+exec --no-startup-id telegram-desktop
+exec --no-startup-id xpad
+exec --no-startup-id thunderbird
+exec --no-startup-id firefox
+exec --no-startup-id redshift-gtk
+exec --no-startup-id mystartup.sh 
+exec --no-startup-id "thunar --daemon"
+exec --no-startup-id humanistenbox
 
 # Lock
 bindsym $mod+$alt+End exec "mylock.sh && systemctl suspend"
@@ -276,8 +279,7 @@ mode "$mode_system" {
 
 bindsym $mod+End mode "$mode_system"
 
-# == Monitors ==
-# /home/philipp/dotfiles/i3/monitors.conf
+
 set $screen="eDP-1"
 set $HDMI="HDMI-2"
 
@@ -288,55 +290,37 @@ bindsym XF86Display+shift+Up move workspace to output $HDMI
 bindsym XF86Display+shift+Down move workspace to output $screen
 bindsym XF86Display exec "xrandr --output $HDMI --auto --above $screen"
 
-
-
-# == Windows ==
-# /home/philipp/dotfiles/i3/windows.conf
-# Kill windows
-# bindsym $alt+F4 kill
-# bindsym $mod+Shift+q kill
-bindsym $mod+shift+slash kill
-
-bindsym $mod+i exec "/home/philipp/dotfiles/scripts/phischstop.sh -m -s"
-bindsym $mod+shift+i exec phischstop -m -c
-
-# Scratchpad
-bindsym $mod+period move scratchpad
-bindsym $mod+comma scratchpad show
-
-# Window style
+# Windows
 hide_edge_borders both
-
-# Set pixel width
 for_window [class="potify"] border pixel 0
-for_window [class="xvt"] border pixel 2
+for_window [class="xvt"] border pixel 0
 for_window [class="Thunderbird"] border pixel 2
 for_window [class="umanistenBox"] border pixel 2
 for_window [class="elegram"] border pixel 2 
+#new_window pixel
 
-# Put to workspace
-assign [title="umanistenBox"] number $ws_chat 
+# Stuff
+#workspace_auto_back_and_forth yes
+
+assign [title="umanistenBox"] $ws_chat 
 assign [class="xpad"] $ws_chat
 assign [class="elegram"] $ws_chat
 assign [class="Thunderbird"] $ws_mail
+# for_window [class="elegram"] floating enable
+for_window [class="xpad"] floating enable
 assign [class="potify"] $ws_music
 
-# Set floating
-for_window [class="xpad"] floating enable
 
+bindsym $mod+period move scratchpad
+bindsym $mod+comma scratchpad show
 
+bindsym --whole-window $mod+button4 workspace next
+bindsym --whole-window $mod+button5 workspace prev
 
+# i3-gaps
+gaps inner 20
+gaps outer 10
+# smart_gaps on
 
-# == Startup ==
-# /home/philipp/dotfiles/i3/startup.conf
-# Startup
-exec --no-startup-id nm-applet
-exec --no-startup-id telegram-desktop
-exec --no-startup-id xpad
-exec --no-startup-id thunderbird
-exec --no-startup-id firefox
-exec --no-startup-id redshift-gtk
-exec --no-startup-id mystartup.sh 
-exec --no-startup-id "thunar --daemon"
-exec --no-startup-id humanistenbox
-
+# Style
+exec_always feh --bg-scale ~/dotfiles/wallpaper/design-wallpaper-22.jpg 

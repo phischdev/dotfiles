@@ -29,3 +29,5 @@ URxvt.color15 : #FFFFFF
 
 URxvt*font: xft:Monospace:pixelsize=16
 URxvt*boldFont: xft:Monospace:pixelsize=16
+
+URxvt*visualBell: true

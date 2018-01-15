@@ -8,12 +8,12 @@
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
-
+alias cat='vimcat'
 alias wifi='sudo wifi-menu'
 alias wieth='wifi && vpneth'
 alias vpneth='sudo openconnect sslvpn.ethz.ch'
 alias service='sudo systemctl'
-alias xbacklight='sudo /usr/local/bin/xbacklight'
+#alias xbacklight='sudo /usr/local/bin/xbacklight'
 export PATH="/home/philipp/bin/Sencha/Cmd:$PATH"
 alias lss='ls -haltr'
 export NVM_DIR="$HOME/.nvm"
