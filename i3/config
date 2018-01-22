@@ -308,12 +308,13 @@ bindsym $mod+comma scratchpad show
 hide_edge_borders both
 
 # Set pixel width
-for_window [class="potify"] border pixel 0
-for_window [class="xvt"] border pixel 2
-for_window [class="Thunderbird"] border pixel 2
-for_window [class="umanistenBox"] border pixel 2
-for_window [class="elegram"] border pixel 2 
-
+# for_window [class="potify"] border pixel 0
+# for_window [class="xvt"] border pixel 0
+# for_window [class="Thunderbird"] border pixel 2
+# for_window [class="umanistenBox"] border pixel 2
+# for_window [class="elegram"] border pixel 2 
+new_window none
+new_float none
 # Put to workspace
 assign [title="umanistenBox"] number $ws_chat 
 assign [class="xpad"] $ws_chat
@@ -323,7 +324,7 @@ assign [class="potify"] $ws_music
 
 # Set floating
 for_window [class="xpad"] floating enable
-
+for_window [class="Frame"] floating enable
 
 
 
@@ -339,4 +340,7 @@ exec --no-startup-id redshift-gtk
 exec --no-startup-id mystartup.sh 
 exec --no-startup-id "thunar --daemon"
 exec --no-startup-id humanistenbox
+exec --no-startup-id compton -b
+exec --no-startup-id i3-msg 'workspace 3'
+
 

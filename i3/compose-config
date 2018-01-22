@@ -173,4 +173,6 @@ bindsym $mod+End mode "$mode_system"
 <include windows.conf>
 
 # == Startup ==
-<include startup.conf> 
+<include startup.conf>
+
+
