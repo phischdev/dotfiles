@@ -276,6 +276,23 @@ mode "$mode_system" {
 
 bindsym $mod+End mode "$mode_system"
 
+# == Displays ==
+# /home/philipp/dotfiles/i3/presentation.conf
+set $mode_pres Display: [i] only internal, [e] only external, [s] side by side, [m] mirrored
+set $pres_loc ~/.screenlayout
+mode "$mode_pres" {
+    bindsym i exec --no-startup-id "$pres_loc/laptop_only", mode "default"
+    bindsym s exec --no-startup-id "$pres_loc/besides", mode "default"
+    #bindsym m exec --no-startup-id "$pres_loc/laptop_only", mode "default"
+    #bindsym o exec --no-startup-id "$pres_loc/besides", mode "default"
+ 
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+P mode "$mode_pres"
+
 # == Monitors ==
 # /home/philipp/dotfiles/i3/monitors.conf
 set $screen="eDP-1"
