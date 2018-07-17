@@ -333,11 +333,12 @@ hide_edge_borders both
 new_window none
 new_float none
 # Put to workspace
-assign [title="umanistenBox"] number $ws_chat 
+assign [class="umanistenbox"] $ws_chat 
 assign [class="xpad"] $ws_chat
 assign [class="elegram"] $ws_chat
 assign [class="Thunderbird"] $ws_mail
 assign [class="potify"] $ws_music
+assign [class="ranz"] $ws_chat
 
 # Set floating
 for_window [class="xpad"] floating enable
@@ -358,6 +359,7 @@ exec --no-startup-id mystartup.sh
 exec --no-startup-id "thunar --daemon"
 exec --no-startup-id humanistenbox
 exec --no-startup-id compton -b
-exec --no-startup-id i3-msg 'workspace 3'
+exec --no-startup-id franz
+# exec --no-startup-id i3-msg 'workspace 3'
 
 

@@ -7,13 +7,15 @@ CUT=`echo $BATTINFO | cut -f 4 -d " " | tr -d [:punct:]`
 if [ "$DISC" = "" ]; then
   echo "Charging"
 else
-  if [ $CUT -lt 6 ]; then
+  if [ $CUT -lt 7 ]; then
     echo "hibernate"
     #sudo pm-hibernate
-    mylock.sh &
+    #mylock.sh &
     systemctl suspend
     #sudo pm-hibernate
+  elif [ $CUT -lt 10 ]; then
+    DISPLAY=:0.0 /usr/bin/notify-send "Low battery." "$BATTINFO" -u critical -t 60000
   elif [ $CUT -lt 20 ]; then
-    DISPLAY=:0.0 /usr/bin/notify-send "low battery" "$BATTINFO" -u critical -t 60000
+    DISPLAY=:0.0 /usr/bin/notify-send "Low battery." "$BATTINFO" -t 60000
   fi
 fi 
