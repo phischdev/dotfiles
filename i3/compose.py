@@ -31,7 +31,7 @@ strSet = "<set "
 # folder = os.path.dirname(os.path.abspath(__file__))
 folder = os.path.dirname(os.path.abspath(args.base))
 
-baseFile = args.base #os.path.join(folder, args.base)
+baseFile = os.path.basename(args.base) #os.path.join(folder, args.base)
 output = os.path.join(folder, args.out)
 
 
@@ -40,11 +40,11 @@ print("writing to", output)
 with open(output, "w") as config:
 
     # startig with base file
-    readStack = ["<include "+baseFile+">"]
+    readQueue = ["<include "+baseFile+">"]
     ifStack = []
     ifVal = True  # determines if current block is evaluated
 
-    for line in readStack:
+    for index, line in enumerate(readQueue):
 
         # endif
         if line.startswith(strEndIf):
@@ -102,12 +102,12 @@ with open(output, "w") as config:
         # include file
         elif line.startswith(strInclude):
             include = line.strip()[len(strInclude):-1]
-            include = os.path.join(folder, include)
+            includePath = os.path.join(folder, include)
             print("including", include)
-            with open(include, "r") as include_file:
-                readStack.append("# " + include + "\n")
-                for i_line in include_file:
-                    readStack.append(i_line)
+
+            with open(includePath, "r") as include_file:
+                readQueue.insert(index+1, "# " + include + "\n")
+                readQueue[index+2:index+2]=include_file.readlines()
 
         # normal line
         else:
