@@ -106,7 +106,7 @@ with open(output, "w") as config:
             print("including", include)
 
             with open(includePath, "r") as include_file:
-                readQueue.insert(index+1, "# " + include + "\n")
+                readQueue.insert(index+1, "# " + includePath + "\n")
                 readQueue[index+2:index+2]=include_file.readlines()
 
         # normal line
